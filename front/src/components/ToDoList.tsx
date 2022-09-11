@@ -8,12 +8,22 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   text-align: center;
   margin: 0 auto;
+  max-width: 400px;
+  min-height: 400px;
+  border-radius: 35px;
+  box-shadow: 3px 3px 14px 10px rgba(0, 0, 0, 0.2);
+`;
+
+const Ti = styled.div`
+  margin-top: 5px;
 `;
 
 const Title = styled.h1`
   font-weight: 600;
   font-size: 25px;
-  margin-top: 15px;
+  padding-top: 10px;
+  text-align: center;
+  align-content: center;
   color: ${(props) => props.theme.accentColor};
 `;
 
@@ -35,8 +45,12 @@ function ToDoList() {
 
   return (
     <Wrapper>
-      <Title>To Dos🗓</Title>
-      <hr />
+      <Ti>
+        {" "}
+        <Title>To Dos🗓</Title>
+        <hr />
+      </Ti>
+
       <Select value={category} onInput={onInput}>
         <option value={Categories.TO_DO}>To Do</option>
         <option value={Categories.DOING}>Doing</option>

@@ -7,6 +7,7 @@ const Input = styled.input`
   border-radius: 10px;
   border: 2px solid;
   border-color: #638351;
+  padding: 0 5px;
 `;
 
 const Btn = styled.button`

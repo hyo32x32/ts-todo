@@ -5,7 +5,23 @@ import styled from "styled-components";
 
 const ToDoList = styled.li`
   margin-bottom: 5px;
-  /* list-style: decimal; */
+  list-style-type: none;
+`;
+
+const Pen = styled.span`
+  margin-left: 3px;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 16px;
+  color: ${(props) => props.theme.accentColor};
+  cursor: pointer;
+`;
+
+const ToDoText = styled.span`
+  margin: 0 7px;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 16px;
 `;
 
 const Btn = styled.button`
@@ -49,7 +65,8 @@ function ToDo({ text, category, id }: IToDo) {
 
   return (
     <ToDoList>
-      <span>{text}</span>
+      <Pen>✎</Pen>
+      <ToDoText>{text}</ToDoText>
       {category !== Categories.DOING && (
         <Btn name={Categories.DOING} onClick={onClick}>
           Doing
