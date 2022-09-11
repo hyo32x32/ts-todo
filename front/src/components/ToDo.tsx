@@ -1,11 +1,34 @@
 import React from "react";
-import { useSetRecoilState } from "recoil";
-import { IToDo, toDoState } from "../atoms";
+import { useSetRecoilState, useRecoilState } from "recoil";
+import { Categories, IToDo, toDoState } from "../atoms";
+import styled from "styled-components";
 
-const food = ["pizza", "mango", "kimchi", "kimbab"];
+const ToDoList = styled.li`
+  margin-bottom: 5px;
+  /* list-style: decimal; */
+`;
+
+const Btn = styled.button`
+  margin-left: 3px;
+  border-radius: 5px;
+  border: 2px solid;
+  background-color: #7a9c64;
+  border-color: #7a9c64;
+  cursor: pointer;
+`;
+
+const Del = styled.span`
+  margin-left: 3px;
+  border-radius: 20px;
+  padding: 0 3px;
+  border: 2px solid;
+  background-color: #7a9c64;
+  border-color: #7a9c64;
+  cursor: pointer;
+`;
 
 function ToDo({ text, category, id }: IToDo) {
-  const setToDos = useSetRecoilState(toDoState);
+  const [toDos, setToDos] = useRecoilState(toDoState);
   const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const {
       currentTarget: { name },
@@ -20,25 +43,30 @@ function ToDo({ text, category, id }: IToDo) {
       ];
     });
   };
+  const onDelete = () => {
+    setToDos((toDos) => toDos.filter((todo) => todo.id !== id));
+  };
+
   return (
-    <li>
+    <ToDoList>
       <span>{text}</span>
-      {category !== "DOING" && (
-        <button name="DOING" onClick={onClick}>
+      {category !== Categories.DOING && (
+        <Btn name={Categories.DOING} onClick={onClick}>
           Doing
-        </button>
+        </Btn>
       )}
-      {category !== "TO_DO" && (
-        <button name="TO_DO" onClick={onClick}>
+      {category !== Categories.TO_DO && (
+        <Btn name={Categories.TO_DO} onClick={onClick}>
           To Do
-        </button>
+        </Btn>
       )}
-      {category !== "DONE" && (
-        <button name="DONE" onClick={onClick}>
+      {category !== Categories.DONE && (
+        <Btn name={Categories.DONE} onClick={onClick}>
           Done
-        </button>
+        </Btn>
       )}
-    </li>
+      <Del onClick={onDelete}>𝐱</Del>
+    </ToDoList>
   );
 }
 export default ToDo;
