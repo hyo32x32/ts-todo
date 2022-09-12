@@ -15,9 +15,20 @@ export interface IToDo {
   category: Categories;
 }
 
+export interface NewCategory {
+  new: string;
+  id: number;
+}
+
 export const categoryState = atom<Categories>({
   key: "category",
   default: Categories.TO_DO,
+});
+
+export const newCategoryState = atom<NewCategory[]>({
+  key: "newCategory",
+  default: [],
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const toDoState = atom<IToDo[]>({

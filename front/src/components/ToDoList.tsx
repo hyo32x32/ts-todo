@@ -1,9 +1,15 @@
 import React from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { Categories, categoryState, toDoSelector } from "../atoms";
+import {
+  Categories,
+  categoryState,
+  toDoSelector,
+  newCategoryState,
+} from "../atoms";
 import CreateToDo from "./CreateToDo";
 import ToDo from "./ToDo";
 import styled from "styled-components";
+import CreateCategory from "./CreateCategory";
 
 const Wrapper = styled.div`
   text-align: center;
@@ -27,15 +33,22 @@ const Title = styled.h1`
   color: ${(props) => props.theme.accentColor};
 `;
 
+const Cate = styled.div`
+  margin: 0 50px;
+  text-align: left;
+`;
+
 const Select = styled.select`
   border-radius: 20px;
   border-color: rgb(94, 145, 145);
   border-width: 2px;
   padding: 0px 10px;
+  margin-right: 20px;
 `;
 
 function ToDoList() {
   const toDos = useRecoilValue(toDoSelector);
+  const newCategory = useRecoilValue(newCategoryState);
   const [category, setCategory] = useRecoilState(categoryState);
   const onInput = (event: React.FormEvent<HTMLSelectElement>) => {
     setCategory(event.currentTarget.value as any);
@@ -50,18 +63,24 @@ function ToDoList() {
         <Title>To Dos🗓</Title>
         <hr />
       </Ti>
-
-      <Select value={category} onInput={onInput}>
-        <option value={Categories.TO_DO}>To Do</option>
-        <option value={Categories.DOING}>Doing</option>
-        <option value={Categories.DONE}>Done</option>
-      </Select>
-
+      <Cate>
+        <Select value={category} onInput={onInput}>
+          <option value={Categories.TO_DO}>To Do</option>
+          <option value={Categories.DOING}>Doing</option>
+          <option value={Categories.DONE}>Done</option>
+          {newCategory?.map((cate) => (
+            <option value={cate.new}>{cate.new}</option>
+          ))}
+        </Select>
+      </Cate>
       <CreateToDo />
       <br />
       {toDos?.map((toDo) => (
         <ToDo key={toDo.id} {...toDo} />
       ))}
+      <div>
+        <CreateCategory />
+      </div>
     </Wrapper>
   );
 }
