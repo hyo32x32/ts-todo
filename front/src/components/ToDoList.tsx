@@ -69,7 +69,7 @@ function ToDoList() {
           <option value={Categories.DOING}>Doing</option>
           <option value={Categories.DONE}>Done</option>
           {newCategory?.map((cate) => (
-            <option value={cate.new}>{cate.new}</option>
+            <option value={cate.newCate}>{cate.newCate}</option>
           ))}
         </Select>
       </Cate>

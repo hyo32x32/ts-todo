@@ -33,9 +33,13 @@ function CreateCategory() {
   const setNewCategory = useSetRecoilState(newCategoryState);
   const { register, handleSubmit, setValue } = useForm<ICategory>();
   const handleValid = ({ newCategory }: ICategory) => {
-    setNewCategory((cate) => [{ new: newCategory, id: Date.now() }, ...cate]);
+    setNewCategory((cate) => [
+      { newCate: newCategory, id: Date.now() },
+      ...cate,
+    ]);
     setValue("newCategory", "");
   };
+
   return (
     <CateForm onSubmit={handleSubmit(handleValid)}>
       {" "}

@@ -16,7 +16,7 @@ export interface IToDo {
 }
 
 export interface NewCategory {
-  new: string;
+  newCate: string;
   id: number;
 }
 
@@ -43,5 +43,14 @@ export const toDoSelector = selector({
     const toDos = get(toDoState);
     const category = get(categoryState);
     return toDos.filter((toDo) => toDo.category === category);
+  },
+});
+
+export const CategorySelector = selector({
+  key: "categorySelector",
+  get: ({ get }) => {
+    const categorys = get(newCategoryState);
+
+    // return categorys.filter((category) => category.newCate === category);
   },
 });
