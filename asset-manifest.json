@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/ts-todo/static/js/main.f6afbe6f.js",
+    "index.html": "/ts-todo/index.html",
+    "main.f6afbe6f.js.map": "/ts-todo/static/js/main.f6afbe6f.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.f6afbe6f.js"
+  ]
+}
